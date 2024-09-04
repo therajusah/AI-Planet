@@ -1,7 +1,10 @@
-const App = () => {
+import React from "react";
+import { MainSection } from "../src/pages/MainSection";
+
+const App: React.FC = () => {
   return (
-    <div className="text-4xl font-bold text-green-700">
-      Welcome to AI Planet
+    <div>
+      <MainSection />
     </div>
   );
 };
