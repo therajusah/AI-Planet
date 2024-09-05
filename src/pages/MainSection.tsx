@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import rocket from "../assets/icons/PicsArt_04-14-04.42 1.svg";
 import img1 from "../assets/icons/Group 1000002515.svg";
 import img2 from "../assets/icons/Group 1000002516.svg";
@@ -10,6 +11,7 @@ import img7 from "../assets/icons/IdentificationCard.svg";
 
 import s3img1 from "../assets/cardimage/Group 1000002771.png";
 import s3img2 from "../assets/cardimage/Group 1000002766.png";
+
 import { FaSearch } from "react-icons/fa";
 import { Header } from "../components/Header";
 import {
@@ -20,7 +22,12 @@ import {
 } from "react-icons/ai";
 
 export const MainSection: React.FC = () => {
- const [isFilterOpen, setFilterOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCreateChallengeClick = () => {
+    navigate("/create-challenge");
+  };
+  const [isFilterOpen, setFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   const toggleFilter = () => {
@@ -57,7 +64,10 @@ export const MainSection: React.FC = () => {
                 <br /> competitions.
               </p>
               <div className="flex justify-center mt-8 md:justify-start">
-                <button className="px-6 py-3 font-semibold text-black bg-white rounded-lg bg-primary hover:bg-primary-dark">
+                <button
+                  onClick={handleCreateChallengeClick}
+                  className="px-6 py-3 font-semibold text-black bg-white rounded-lg bg-primary hover:bg-primary-dark"
+                >
                   Create Challenge
                 </button>
               </div>
