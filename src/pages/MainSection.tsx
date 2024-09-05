@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import rocket from "../assets/icons/PicsArt_04-14-04.42 1.svg";
 import img1 from "../assets/icons/Group 1000002515.svg";
 import img2 from "../assets/icons/Group 1000002516.svg";
@@ -11,15 +11,32 @@ import img7 from "../assets/icons/IdentificationCard.svg";
 import s3img1 from "../assets/cardimage/Group 1000002771.png";
 import s3img2 from "../assets/cardimage/Group 1000002766.png";
 import { FaSearch } from "react-icons/fa";
-import { AiOutlineCheck } from "react-icons/ai";
 import { Header } from "../components/Header";
+import {
+  AiOutlineCheck,
+  AiOutlineDown,
+  AiOutlineUp,
+  AiOutlineClose,
+} from "react-icons/ai";
 
 export const MainSection: React.FC = () => {
-  const [isFilterOpen, setFilterOpen] = useState(false);
-  const filterButtonRef = useRef<HTMLButtonElement>(null);
+ const [isFilterOpen, setFilterOpen] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   const toggleFilter = () => {
     setFilterOpen(!isFilterOpen);
+  };
+
+  const handleFilterChange = (filter: string) => {
+    if (selectedFilters.includes(filter)) {
+      setSelectedFilters(selectedFilters.filter((f) => f !== filter));
+    } else {
+      setSelectedFilters([...selectedFilters, filter]);
+    }
+  };
+
+  const removeFilter = (filter: string) => {
+    setSelectedFilters(selectedFilters.filter((f) => f !== filter));
   };
 
   return (
@@ -95,7 +112,7 @@ export const MainSection: React.FC = () => {
           <h2 className="mb-10 text-3xl font-semibold text-black">
             Why Participate in{" "}
             <span className="text-green-600">AI Challenges?</span>
-          </h2>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz3333333333333333333333333333333333333333
+          </h2>
         </div>
 
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] md:w-[75%]">
@@ -154,6 +171,7 @@ export const MainSection: React.FC = () => {
         </div>
       </div>
 
+      {/* Filter Section */}
       <section className="relative w-full py-12">
         <div className="container mx-auto text-center">
           {/* Search */}
@@ -171,15 +189,19 @@ export const MainSection: React.FC = () => {
                   />
                   <FaSearch className="absolute text-gray-500 transform -translate-y-1/2 top-1/2 left-3" />
                 </div>
-                {/* Filter button */}
+
                 <div className="relative">
                   <button
-                    ref={filterButtonRef}
                     onClick={toggleFilter}
                     className="flex items-center px-4 py-2 text-black bg-white rounded-md"
                   >
                     Filter
+                    <span className="ml-2">
+                      {isFilterOpen ? <AiOutlineUp /> : <AiOutlineDown />}
+                    </span>
                   </button>
+
+                  {/* Filter dropdown */}
                   {isFilterOpen && (
                     <div
                       className="absolute left-0 z-10 w-[200px] p-4 mt-2 bg-white rounded-md shadow-lg"
@@ -192,7 +214,9 @@ export const MainSection: React.FC = () => {
                             <input
                               type="checkbox"
                               name="status"
-                              value="all"
+                              value="All"
+                              checked={selectedFilters.includes("All")}
+                              onChange={() => handleFilterChange("All")}
                               className="mr-2"
                             />
                             All
@@ -201,7 +225,9 @@ export const MainSection: React.FC = () => {
                             <input
                               type="checkbox"
                               name="status"
-                              value="active"
+                              value="Active"
+                              checked={selectedFilters.includes("Active")}
+                              onChange={() => handleFilterChange("Active")}
                               className="mr-2"
                             />
                             Active
@@ -210,7 +236,9 @@ export const MainSection: React.FC = () => {
                             <input
                               type="checkbox"
                               name="status"
-                              value="upcoming"
+                              value="Upcoming"
+                              checked={selectedFilters.includes("Upcoming")}
+                              onChange={() => handleFilterChange("Upcoming")}
                               className="mr-2"
                             />
                             Upcoming
@@ -219,15 +247,16 @@ export const MainSection: React.FC = () => {
                             <input
                               type="checkbox"
                               name="status"
-                              value="past"
+                              value="Past"
+                              checked={selectedFilters.includes("Past")}
+                              onChange={() => handleFilterChange("Past")}
                               className="mr-2"
                             />
                             Past
                           </label>
                         </div>
                       </div>
-                      <div className="my-4 border-b"></div>{" "}
-                      {/* Small line shadow */}
+
                       <div className="mb-4">
                         <h4 className="mb-2 text-lg font-semibold">Level</h4>
                         <div className="flex flex-col space-y-2">
@@ -235,7 +264,9 @@ export const MainSection: React.FC = () => {
                             <input
                               type="checkbox"
                               name="level"
-                              value="easy"
+                              value="Easy"
+                              checked={selectedFilters.includes("Easy")}
+                              onChange={() => handleFilterChange("Easy")}
                               className="mr-2"
                             />
                             Easy
@@ -244,7 +275,9 @@ export const MainSection: React.FC = () => {
                             <input
                               type="checkbox"
                               name="level"
-                              value="medium"
+                              value="Medium"
+                              checked={selectedFilters.includes("Medium")}
+                              onChange={() => handleFilterChange("Medium")}
                               className="mr-2"
                             />
                             Medium
@@ -253,7 +286,9 @@ export const MainSection: React.FC = () => {
                             <input
                               type="checkbox"
                               name="level"
-                              value="hard"
+                              value="Hard"
+                              checked={selectedFilters.includes("Hard")}
+                              onChange={() => handleFilterChange("Hard")}
                               className="mr-2"
                             />
                             Hard
@@ -264,40 +299,56 @@ export const MainSection: React.FC = () => {
                   )}
                 </div>
               </div>
+
+              {/* Selected Filters */}
+              <div className="flex flex-wrap justify-center mt-4 space-x-4">
+                {selectedFilters.map((filter) => (
+                  <div
+                    key={filter}
+                    className="flex items-center px-4 py-2 text-white bg-gray-600 rounded-full"
+                  >
+                    {filter}
+                    <AiOutlineClose
+                      className="ml-2 cursor-pointer"
+                      onClick={() => removeFilter(filter)}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Challenge Cards */}
-          <div className="py-12 bg-[#003145]">
-            <div className="grid grid-cols-1 gap-6 mx-auto md:gap-6 md:grid-cols-3 w-[80%]">
-              {[s3img1, s3img2, s3img1, s3img2, s3img1, s3img2].map(
-                (imgSrc, index) => (
-                  <div
-                    key={index}
-                    className="relative flex flex-col w-[300px] h-[420px] bg-white rounded-lg shadow-md"
-                  >
-                    <img
-                      src={imgSrc}
-                      alt="Challenge"
-                      className="object-cover w-full h-48 mb-4 rounded-t-lg"
-                    />
-                    <div className="flex flex-col flex-grow p-4">
-                      <h3 className="mb-2 text-xl font-semibold">
-                        Data Science Bootcamp - Graded Datathon
-                      </h3>
-                      <p className="text-sm text-gray-600">Starts in</p>
-                      <p className="mb-4 text-sm text-gray-600">
-                        00 Days : 15 Hours : 22 Mins
-                      </p>
-                    </div>
-                    <button className="absolute flex items-center px-4 py-2 space-x-2 text-white transform -translate-x-1/2 bg-green-600 rounded-lg bottom-6 left-1/2 whitespace-nowrap">
-                      <AiOutlineCheck className="text-lg" />
-                      <span className="text-sm">Participate Now</span>
-                    </button>
+        {/* Challenge Cards */}
+        <div className="py-12 bg-[#003145]">
+          <div className="grid grid-cols-1 gap-6 mx-auto md:gap-6 md:grid-cols-3 w-[80%]">
+            {[s3img1, s3img2, s3img1, s3img2, s3img1, s3img2].map(
+              (imgSrc, index) => (
+                <div
+                  key={index}
+                  className="relative flex flex-col w-[300px] h-[420px] bg-white rounded-lg shadow-md"
+                >
+                  <img
+                    src={imgSrc}
+                    alt="Challenge"
+                    className="object-cover w-full h-48 mb-4 rounded-t-lg"
+                  />
+                  <div className="flex flex-col flex-grow p-4">
+                    <h3 className="mb-2 text-xl font-semibold">
+                      Data Science Bootcamp - Graded Datathon
+                    </h3>
+                    <p className="text-sm text-gray-600">Starts in</p>
+                    <p className="mb-4 text-sm text-gray-600">
+                      00 Days : 15 Hours : 22 Mins
+                    </p>
                   </div>
-                )
-              )}
-            </div>
+                  <button className="absolute flex items-center px-4 py-2 space-x-2 text-white transform -translate-x-1/2 bg-green-600 rounded-lg bottom-6 left-1/2 whitespace-nowrap">
+                    <AiOutlineCheck className="text-lg" />
+                    <span className="text-sm">Participate Now</span>
+                  </button>
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>
