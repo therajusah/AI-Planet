@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import rocket from "../assets/icons/PicsArt_04-14-04.42 1.svg";
 import img1 from "../assets/icons/Group 1000002515.svg";
 import img2 from "../assets/icons/Group 1000002516.svg";
@@ -15,9 +15,15 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { Header } from "../components/Header";
 
 export const MainSection: React.FC = () => {
+  const [isFilterOpen, setFilterOpen] = useState(false);
+  const filterButtonRef = useRef<HTMLButtonElement>(null);
+
+  const toggleFilter = () => {
+    setFilterOpen(!isFilterOpen);
+  };
+
   return (
     <div>
-      {/* First Page */}
       <Header />
       <div className="pb-12 text-white bg-[#003145] w-full h-full">
         <div className="container flex flex-col-reverse items-center justify-between px-8 py-12 mx-auto text-center md:flex-row">
@@ -56,7 +62,7 @@ export const MainSection: React.FC = () => {
             <div className="w-16 h-16">
               <img src={img1} alt="AI model submissions" />
             </div>
-            <div className="text-left">
+            <div className="mb-2 text-left">
               <h3 className="font-bold text-white">100K+</h3>
               <p className="text-gray-300">AI model submissions</p>
             </div>
@@ -66,7 +72,7 @@ export const MainSection: React.FC = () => {
             <div className="w-16 h-16">
               <img src={img2} alt="Data Scientists" />
             </div>
-            <div className="text-left">
+            <div className="mb-2 text-left">
               <h3 className="font-bold text-white">50K+</h3>
               <p className="text-gray-300">Data Scientists</p>
             </div>
@@ -76,7 +82,7 @@ export const MainSection: React.FC = () => {
             <div className="w-16 h-16">
               <img src={img3} alt="AI Challenges hosted" />
             </div>
-            <div className="text-left">
+            <div className="mb-2 text-left">
               <h3 className="font-bold text-white">100+</h3>
               <p className="text-gray-300">AI Challenges hosted</p>
             </div>
@@ -84,13 +90,12 @@ export const MainSection: React.FC = () => {
         </div>
       </section>
 
-      {/* Second Page */}
       <div className="py-16 bg-white">
         <div className="container mx-auto text-center">
           <h2 className="mb-10 text-3xl font-semibold text-black">
             Why Participate in{" "}
             <span className="text-green-600">AI Challenges?</span>
-          </h2>
+          </h2>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz3333333333333333333333333333333333333333
         </div>
 
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 w-[90%] md:w-[75%]">
@@ -149,7 +154,6 @@ export const MainSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Third Page */}
       <section className="relative w-full py-12">
         <div className="container mx-auto text-center">
           {/* Search */}
@@ -167,21 +171,110 @@ export const MainSection: React.FC = () => {
                   />
                   <FaSearch className="absolute text-gray-500 transform -translate-y-1/2 top-1/2 left-3" />
                 </div>
-                <button className="px-4 py-2 text-black bg-white rounded-md">
-                  Filter
-                </button>
+                {/* Filter button */}
+                <div className="relative">
+                  <button
+                    ref={filterButtonRef}
+                    onClick={toggleFilter}
+                    className="flex items-center px-4 py-2 text-black bg-white rounded-md"
+                  >
+                    Filter
+                  </button>
+                  {isFilterOpen && (
+                    <div
+                      className="absolute left-0 z-10 w-[200px] p-4 mt-2 bg-white rounded-md shadow-lg"
+                      style={{ top: "calc(100% + 4px)" }}
+                    >
+                      <div className="mb-4">
+                        <h4 className="mb-2 text-lg font-semibold">Status</h4>
+                        <div className="flex flex-col space-y-2">
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="status"
+                              value="all"
+                              className="mr-2"
+                            />
+                            All
+                          </label>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="status"
+                              value="active"
+                              className="mr-2"
+                            />
+                            Active
+                          </label>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="status"
+                              value="upcoming"
+                              className="mr-2"
+                            />
+                            Upcoming
+                          </label>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="status"
+                              value="past"
+                              className="mr-2"
+                            />
+                            Past
+                          </label>
+                        </div>
+                      </div>
+                      <div className="my-4 border-b"></div>{" "}
+                      {/* Small line shadow */}
+                      <div className="mb-4">
+                        <h4 className="mb-2 text-lg font-semibold">Level</h4>
+                        <div className="flex flex-col space-y-2">
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="level"
+                              value="easy"
+                              className="mr-2"
+                            />
+                            Easy
+                          </label>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="level"
+                              value="medium"
+                              className="mr-2"
+                            />
+                            Medium
+                          </label>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="level"
+                              value="hard"
+                              className="mr-2"
+                            />
+                            Hard
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
 
           {/* Challenge Cards */}
           <div className="py-12 bg-[#003145]">
-            <div className="grid grid-cols-1 gap-6 md:gap-6 md:grid-cols-3 mx-auto w-[80%]">
+            <div className="grid grid-cols-1 gap-6 mx-auto md:gap-6 md:grid-cols-3 w-[80%]">
               {[s3img1, s3img2, s3img1, s3img2, s3img1, s3img2].map(
                 (imgSrc, index) => (
                   <div
                     key={index}
-                    className="relative flex flex-col bg-white rounded-lg shadow-md w-[300px] h-[420px]"
+                    className="relative flex flex-col w-[300px] h-[420px] bg-white rounded-lg shadow-md"
                   >
                     <img
                       src={imgSrc}
