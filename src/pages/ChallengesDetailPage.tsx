@@ -7,13 +7,8 @@ const ChallengesDetailPage = () => {
       <Header />
       <div className="bg-[#003145] w-full py-16 px-8 flex justify-center relative">
         <div
-          className="max-w-[1442px] w-full text-left rounded-lg shadow-lg p-8 relative"
-          style={{
-            width: "1442px",
-            height: "419px",
-            top: "64px",
-            left: "-1px",
-          }}
+          className="max-w-[1442px] w-full text-left p-8 relative"
+  
         >
           <div
             className="absolute bg-[#FFDB70] text-black py-2 px-4 rounded-br-lg text-sm font-medium"
