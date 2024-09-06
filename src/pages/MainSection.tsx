@@ -27,6 +27,9 @@ export const MainSection: React.FC = () => {
   const handleCreateChallengeClick = () => {
     navigate("/create-challenge");
   };
+  const handleChallengeDetailClick = () => {
+    navigate("/challenge-detail");
+  };
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
@@ -343,7 +346,7 @@ export const MainSection: React.FC = () => {
                     alt="Challenge"
                     className="object-cover w-full h-48 mb-4 rounded-t-lg"
                   />
-                  <div className="flex flex-col flex-grow p-4">
+                  <div className="flex flex-col content-center flex-grow p-4 text-center">
                     <h3 className="mb-2 text-xl font-semibold">
                       Data Science Bootcamp - Graded Datathon
                     </h3>
@@ -352,7 +355,10 @@ export const MainSection: React.FC = () => {
                       00 Days : 15 Hours : 22 Mins
                     </p>
                   </div>
-                  <button className="absolute flex items-center px-4 py-2 space-x-2 text-white transform -translate-x-1/2 bg-green-600 rounded-lg bottom-6 left-1/2 whitespace-nowrap">
+                  <button
+                    className="absolute flex items-center px-4 py-2 space-x-2 text-white transform -translate-x-1/2 bg-green-600 rounded-lg bottom-6 left-1/2 whitespace-nowrap"
+                    onClick={handleChallengeDetailClick}
+                  >
                     <AiOutlineCheck className="text-lg" />
                     <span className="text-sm">Participate Now</span>
                   </button>

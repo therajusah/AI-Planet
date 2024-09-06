@@ -26,7 +26,7 @@ const ChallengesDetailPage = () => {
           </div>
 
           <div className="mt-4 -ml-7">
-            <div className="text-left mt-8">
+            <div className="mt-8 text-left">
               <h2 className="text-[32px] font-bold text-white">
                 Data Sprint 72 - Butterfly Identification
               </h2>
@@ -35,8 +35,8 @@ const ChallengesDetailPage = () => {
               </p>
             </div>
 
-            <button className="flex justify-center mt-4 px-3 py-2 bg-white rounded-md">
-              <img src={levelimg} alt="Difficulty" className="h-6 w-8 text-white" />
+            <button className="flex justify-center px-3 py-2 mt-4 bg-white rounded-md">
+              <img src={levelimg} alt="Difficulty" className="w-8 h-6 text-white" />
               <span className="ml-2 text-[18px] text-left font-medium text-black">
                 Easy
               </span>
@@ -46,7 +46,7 @@ const ChallengesDetailPage = () => {
       </div>
 
 
-      <div className="w-full flex justify-center mt-4">
+      <div className="flex justify-center w-full mt-4">
         <div
           className="flex justify-between items-center w-full max-w-[1440px] bg-white shadow-lg p-4"
           style={{
@@ -58,23 +58,23 @@ const ChallengesDetailPage = () => {
           <div className="flex items-center">
             <h3 className="text-[24px] font-semibold text-[#003145] mr-4">
               Overview
-                <div className="bg-green-500 w-26 h-1 mt-6" />
+                <div className="h-1 mt-6 bg-green-500 w-26" />
             </h3>
           
           </div>
 
           <div className="flex gap-4">
-            <button className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600">
+            <button className="px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600">
               Edit
             </button>
-            <button className="bg-red-500 text-white py-2 px-6 rounded-md hover:bg-red-600">
+            <button className="px-6 py-2 text-white bg-red-500 rounded-md hover:bg-red-600">
               Delete
             </button>
           </div>
         </div>
       </div>
 
-      <div className="w-full flex justify-center mt-4">
+      <div className="flex justify-center w-full mt-4">
         <div
           className="bg-white w-[80%] rounded-lg p-8 max-w-[1440px]"
           style={{
